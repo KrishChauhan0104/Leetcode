@@ -15,25 +15,19 @@
  */
 class Solution {
     public int countNodes(TreeNode root) {
-        if(root == null){   
-        return 0;
-        }
-        int leftHeight = height(root.left);
-        int rightHeight = height(root.right);
+         List<Integer> result = new ArrayList<>();
+          inorder(root, result);
 
-        if(leftHeight == rightHeight){
-            return (1<<leftHeight) + countNodes(root.right);
-        } else{
-            return (1<<rightHeight) + countNodes(root.left);
-        }
+          return result.size();
+
     }
-    private int height(TreeNode node) {
-        int height = 0;
-        while (node != null) {
-            height++;
-            node = node.left; 
-        }
-        return height;
+
+    private void inorder(TreeNode node, List<Integer> result)
+    {
+         if (node == null) return;
+         inorder(node.left, result);
+          result.add(node.val);   
+         inorder(node.right, result);
     }
     
 }
